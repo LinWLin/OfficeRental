@@ -11,12 +11,37 @@
 			margin:10px 50px;
 			background: #E1EFF2;
 		}
+		div.introduce {
+			padding:50px 15px 15px 15px;
+		}
+		div.introduce div{
+			padding-left: 60px;
+			height:50px;
+			line-height: 50px;
+		}
+		div.introduce div.intr_1{
+			background: url(img/chair01.png) no-repeat;
+			background-position: 9px 9px;
+		}
+		div.introduce div.intr_2{
+			background: url(img/chair02.png) no-repeat;
+			background-position: 9px 9px;
+		}
+		div.introduce div.intr_3{
+			background: url(img/chair03.png) no-repeat;
+			background-position: 9px 9px;
+		}
 	</style>
 </head>
 <body>
 	<canvas id="myCanvas" width="1200" height="1200">
 		您的浏览器不支持H5 canvas标签
 	</canvas>
+	<div class="introduce">
+		<div class="intr_1">可选</div>
+		<div class="intr_2">已选</div>
+		<div class="intr_3">不可选</div>
+	</div>
 
 	<script>
 		window.onload=function(){
