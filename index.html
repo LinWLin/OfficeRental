@@ -8,8 +8,7 @@
 	<style>
 		*{padding:0;margin:0;}
 		canvas {
-			display:block;
-			margin:0 auto;
+			margin:10px 50px;
 			background: #E1EFF2;
 		}
 	</style>
@@ -20,215 +19,227 @@
 	</canvas>
 
 	<script>
-	window.onload=function(){
-		var c=document.getElementById("myCanvas");
-		var ctx=c.getContext("2d");
-		var img=new Image();
-		var imgA=new Image();
-		var imgB=new Image();
-		img.src="img/chair01.png";
-		imgA.src="img/chair2.png";
-		imgB.src="img/chair3.png";
+		window.onload=function(){
+			var c=document.getElementById("myCanvas");
+			var ctx=c.getContext("2d");
+			var img=new Image();
+			var imgA=new Image();
+			var imgB=new Image();
+			img.src="img/chair01.png";
+			imgA.src="img/chair2.png";
+			imgB.src="img/chair3.png";
+/**********************/	
+			function roundedRect(cornerX, cornerY, width, height, cornerRadius) {
+			   if (width> 0) ctx.moveTo(cornerX + cornerRadius, cornerY);
+			   else  ctx.moveTo(cornerX - cornerRadius, cornerY);
+			   ctx.arcTo(cornerX+width,cornerY,cornerX + width,cornerY+height,cornerRadius);
+			   ctx.arcTo(cornerX+width,cornerY + height,cornerX,cornerY+height,cornerRadius);
+			   ctx.arcTo(cornerX,cornerY+height,cornerX,cornerY,cornerRadius);
+			   if(width> 0) {
+			      ctx.arcTo(cornerX,cornerY,cornerX+cornerRadius,cornerY,cornerRadius);
+			   }
+			   else{
+			     ctx.arcTo(cornerX,cornerY,cornerX-cornerRadius,cornerY,cornerRadius);
+			   }
+			}
+			function drawRoundedRect(strokeStyle,fillStyle,cornerX,cornerY,width,height,cornerRadius) {
+			   ctx.beginPath();
+			   roundedRect(cornerX, cornerY, width, height, cornerRadius);
+			   ctx.strokeStyle = strokeStyle;
+			   ctx.fillStyle = fillStyle;
+			   ctx.stroke();
+			   ctx.fill();
+			}
+			////////////////////////////////////////////////////////////////////////
+			// drawRoundedRect('#FCCEAD',   '#FCCEAD',  999,  230,  90,  90, 20); //
+			////////////////////////////////////////////////////////////////////////
+			//绘制圆角矩形的的方法//
+/**********************/
 
+			for(var a=0,x=116;a<8;a++){
+				drawRoundedRect('#FCCEAD',   '#FCCEAD',  x,  230,  90,  90, 20);
+				x+=100;
+			}
 
-		for(var a=0,x=116;a<8;a++){
-			ctx.fillStyle='#FCCEAD';
-			ctx.fillRect(x,230,90,90);
-			x+=100;
-		}
+			for(var b=0,x=116;b<6;b++){
+				drawRoundedRect('#FCCEAD',   '#FCCEAD',  x,  880,  90,  90, 20);
+				x+=100;
 
-		for(var b=0,x=116;b<6;b++){
-			ctx.fillStyle='#FCCEAD';
-			ctx.fillRect(x,880,90,90);
-			x+=100;
-		}
-		ctx.fillRect(610,1030,210,105);
-		ctx.fillRect(840,1030,170,105);
-		ctx.fillRect(1030,1030,160,105);
+			}
+				drawRoundedRect('#FCCEAD',   '#FCCEAD', 610, 1030, 210, 105, 20);
+				drawRoundedRect('#FCCEAD',   '#FCCEAD', 840, 1030, 170, 105, 20);
+				drawRoundedRect('#FCCEAD',   '#FCCEAD', 1030, 1030, 160, 105, 20);
 
-		img.onload=function(){
-			/*首三行*/
-		for(var i=0,x=6;i<24;i++){
-			ctx.drawImage(img,x,40);
-			ctx.drawImage(img,x,90);
-			ctx.drawImage(img,x,140);
-			x+=50;
-		}
-
-		/* 左边中间两列 */
-		for(var j=0,y=230;j<15;j++){
-			ctx.drawImage(img,6,y);
-			ctx.drawImage(img,56,y);
-			y+=50;
-		}
-
-
-		/* 左边12个工位 */
-		for(var k=0,y=1020;k<3;k++){
-			ctx.drawImage(img,6,y);
-			ctx.drawImage(img,56,y);
-			ctx.drawImage(img,106,y);
-			ctx.drawImage(img,156,y);
-			y+=50;
-		}
-
-		/* 8个三人工位 */
-		for(var l=0,x1=120,x2=165;l<8;l++){
-			ctx.drawImage(img,x1,240);
-			ctx.drawImage(img,x2,240);
-			ctx.drawImage(img,(x1+x2)/2,280);
-			x1+=100;x2+=100;
-		}
-
-		/* 6个三人工位 */
-		for(var m=0,x1=120,x2=165;m<6;m++){
-			ctx.drawImage(imgB,x1,890);
-			ctx.drawImage(imgB,x2,890);
-			ctx.drawImage(imgB,(x1+x2)/2,930);
-			x1+=100;x2+=100;
-		}
-
-		/* 右边两列 */
-		for(var n=0,y=360;n<11;n++){
-			ctx.drawImage(img,1100,y);
-			ctx.drawImage(img,1156,y);
-			y+=57;
-		}
-
-
-		/*8个工位*/
-		for(var o=0,y=1040;o<2;o++){
-			ctx.drawImage(img,620,y);
-			ctx.drawImage(img,670,y);
-			ctx.drawImage(img,720,y);
-			ctx.drawImage(img,770,y);
-			y+=50;
-		}
-
-
-		/*5个工位*/
-		for(var k=0,y=1040;k<2;k++){
-			ctx.drawImage(img,855,y);
-			ctx.drawImage(img,905,y);
-			y+=50;
-		}
-			ctx.drawImage(img,955,1065);
-
-
-		/*6个工位*/
-		for(var p=0,y=1040;p<2;p++){
-			ctx.drawImage(imgA,1040,y);
-			ctx.drawImage(img,1090,y);
-			ctx.drawImage(img,1140,y);
-			y+=50;
-		}
-		}
-
-		ctx.fillStyle='#F0F0F0';
-		ctx.fillRect(115,330,970,540);
-		ctx.fillRect(920,210,270,120);
-		ctx.fillRect(720,870,365,120);
-
-
-		ctx.strokeStyle="#000";
-		drawRoundRect(ctx, 130, 345, 150, 200, 20);      
-        ctx.stroke();
-        
-        ctx.font="20px Arial";
-        ctx.fillStyle = "#000000";
-		ctx.fillText("会议室 3",170,445);
-
-		ctx.fillText("会议室 4",170,660);
-
-		ctx.fillText("休息区 2",170,815);
-
-		ctx.fillText("消防通道 1",325,395);
-
-		ctx.fillText("正 门",510,395);
-
-		ctx.fillText("电 梯",510,595);
-
-		ctx.fillText("后 门",510,800);
-
-		ctx.fillText("消防通道 2",670,800);
-
-		ctx.fillText("卫生间",680,575);
-
-		ctx.fillText("机 房",810,930);
-
-		ctx.fillText("前 台",985,400);
-
-		ctx.fillText("仓 库",985,590);
-
-		ctx.fillText("会议室 1",970,850);
-
-		ctx.fillText("会议室 2",970,275);
-
-		ctx.fillText("休息区 1",1090,275);
-
-
-
-
-
-
-
-
-
-
-
-
-
-		drawRoundRect(ctx, 130, 555, 150, 200, 20);      
-        ctx.stroke();
-
-        drawRoundRect(ctx, 130, 765, 150, 90, 20);      
-        ctx.stroke();
-
-
-		drawRoundRect(ctx, 295, 345, 150, 90, 20);      
-        ctx.stroke();
-
-		drawRoundRect(ctx, 460, 345, 150, 90, 20);      
-        ctx.stroke();
-		drawRoundRect(ctx, 460, 445, 150, 280, 20);      
-        ctx.stroke();
-		drawRoundRect(ctx, 460, 735, 150, 120, 20);      
-        ctx.stroke();
-
-		drawRoundRect(ctx, 625, 400, 180, 325, 20);      
-        ctx.stroke();
-		drawRoundRect(ctx, 625, 735, 180, 120, 20);      
-        ctx.stroke();
-
-		drawRoundRect(ctx, 735, 880, 190, 95, 20);      
-        ctx.stroke();
-
-		drawRoundRect(ctx, 940, 345, 130, 100, 20);      
-        ctx.stroke();
-		drawRoundRect(ctx, 940, 455, 130, 255, 20);      
-        ctx.stroke();
-		drawRoundRect(ctx, 940, 720, 130, 255, 20);      
-        ctx.stroke();
-
-		drawRoundRect(ctx, 940, 225, 130, 90, 20);      
-        ctx.stroke();
-		drawRoundRect(ctx, 1085, 225, 90, 90, 20);      
-        ctx.stroke();
-
-        
 		
-		function drawRoundRect(cxt, x, y, width, height, radius){   
-			cxt.beginPath();   
-			cxt.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);   
-			cxt.lineTo(width - radius + x, y);   
-			cxt.arc(width - radius + x, radius + y, radius, Math.PI * 3 / 2, Math.PI * 2);   
-			cxt.lineTo(width + x, height + y - radius);   
-			cxt.arc(width - radius + x, height - radius + y, radius, 0, Math.PI * 1 / 2);   
-			cxt.lineTo(radius + x, height +y);   
-			cxt.arc(radius + x, height - radius + y, radius, Math.PI * 1 / 2, Math.PI);   
-			cxt.closePath();   
-		}  
-	}
+
+			img.onload=function(){
+				/*首三行*/
+			for(var i=0,x=6;i<24;i++){
+				ctx.drawImage(img,x,40);
+				ctx.drawImage(img,x,90);
+				ctx.drawImage(img,x,140);
+				x+=50;
+			}
+
+			/* 左边中间两列 */
+			for(var j=0,y=230;j<15;j++){
+				ctx.drawImage(img,6,y);
+				ctx.drawImage(img,56,y);
+				y+=50;
+			}
+
+
+			/* 左边12个工位 */
+			for(var k=0,y=1020;k<3;k++){
+				ctx.drawImage(img,6,y);
+				ctx.drawImage(img,56,y);
+				ctx.drawImage(img,106,y);
+				ctx.drawImage(img,156,y);
+				y+=50;
+			}
+
+			/* 8个三人工位 */
+			for(var l=0,x1=120,x2=165;l<8;l++){
+				ctx.drawImage(img,x1,240);
+				ctx.drawImage(img,x2,240);
+				ctx.drawImage(img,(x1+x2)/2,280);
+				x1+=100;x2+=100;
+			}
+
+			/* 6个三人工位 */
+			for(var m=0,x1=120,x2=165;m<6;m++){
+				ctx.drawImage(img,x1,890);
+				ctx.drawImage(img,x2,890);
+				ctx.drawImage(img,(x1+x2)/2,930);
+				x1+=100;x2+=100;
+			}
+
+			/* 右边两列 */
+			for(var n=0,y=360;n<11;n++){
+				ctx.drawImage(img,1100,y);
+				ctx.drawImage(img,1156,y);
+				y+=57;
+			}
+
+
+			/*8个工位*/
+			for(var o=0,y=1040;o<2;o++){
+				ctx.drawImage(img,620,y);
+				ctx.drawImage(img,670,y);
+				ctx.drawImage(img,720,y);
+				ctx.drawImage(img,770,y);
+				y+=50;
+			}
+
+
+			/*5个工位*/
+			for(var k=0,y=1040;k<2;k++){
+				ctx.drawImage(img,855,y);
+				ctx.drawImage(img,905,y);
+				y+=50;
+			}
+				ctx.drawImage(img,955,1065);
+
+
+			/*6个工位*/
+			for(var p=0,y=1040;p<2;p++){
+				ctx.drawImage(img,1040,y);
+				ctx.drawImage(img,1090,y);
+				ctx.drawImage(img,1140,y);
+				y+=50;
+			}
+			}
+
+			ctx.fillStyle='#F0F0F0';
+			ctx.fillRect(115,330,970,540);
+			ctx.fillRect(920,210,270,120);
+			ctx.fillRect(720,870,365,120);
+
+
+			ctx.strokeStyle="#000";
+			drawRoundRect(ctx, 130, 345, 150, 200, 20);      
+	        ctx.stroke();
+	        
+	        ctx.font="20px Arial";
+	        ctx.fillStyle = "#000000";
+			ctx.fillText("会议室 3",170,445);
+
+			ctx.fillText("会议室 4",170,660);
+
+			ctx.fillText("休息区 2",170,815);
+
+			ctx.fillText("消防通道 1",325,395);
+
+			ctx.fillText("正 门",510,395);
+
+			ctx.fillText("电 梯",510,595);
+
+			ctx.fillText("后 门",510,800);
+
+			ctx.fillText("消防通道 2",670,800);
+
+			ctx.fillText("卫生间",680,575);
+
+			ctx.fillText("机 房",810,930);
+
+			ctx.fillText("前 台",985,400);
+
+			ctx.fillText("仓 库",985,590);
+
+			ctx.fillText("会议室 1",970,850);
+
+			ctx.fillText("会议室 2",970,275);
+
+			ctx.fillText("休息区 1",1090,275);
+
+			drawRoundRect(ctx, 130, 555, 150, 200, 20);      
+	        ctx.stroke();
+
+	        drawRoundRect(ctx, 130, 765, 150, 90, 20);      
+	        ctx.stroke();
+
+			drawRoundRect(ctx, 295, 345, 150, 90, 20);      
+	        ctx.stroke();
+
+			drawRoundRect(ctx, 460, 345, 150, 90, 20);      
+	        ctx.stroke();
+			drawRoundRect(ctx, 460, 445, 150, 280, 20);      
+	        ctx.stroke();
+			drawRoundRect(ctx, 460, 735, 150, 120, 20);      
+	        ctx.stroke();
+
+			drawRoundRect(ctx, 625, 400, 180, 325, 20);      
+	        ctx.stroke();
+			drawRoundRect(ctx, 625, 735, 180, 120, 20);      
+	        ctx.stroke();
+
+			drawRoundRect(ctx, 735, 880, 190, 95, 20);      
+	        ctx.stroke();
+
+			drawRoundRect(ctx, 940, 345, 130, 100, 20);      
+	        ctx.stroke();
+			drawRoundRect(ctx, 940, 455, 130, 255, 20);      
+	        ctx.stroke();
+			drawRoundRect(ctx, 940, 720, 130, 255, 20);      
+	        ctx.stroke();
+
+			drawRoundRect(ctx, 940, 225, 130, 90, 20);      
+	        ctx.stroke();
+			drawRoundRect(ctx, 1085, 225, 90, 90, 20);      
+	        ctx.stroke();
+			
+			function drawRoundRect(cxt, x, y, width, height, radius){   
+				cxt.beginPath();   
+				cxt.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);   
+				cxt.lineTo(width - radius + x, y);   
+				cxt.arc(width - radius + x, radius + y, radius, Math.PI * 3 / 2, Math.PI * 2);   
+				cxt.lineTo(width + x, height + y - radius);   
+				cxt.arc(width - radius + x, height - radius + y, radius, 0, Math.PI * 1 / 2);   
+				cxt.lineTo(radius + x, height +y);   
+				cxt.arc(radius + x, height - radius + y, radius, Math.PI * 1 / 2, Math.PI);   
+				cxt.closePath();   
+			}  
+		}
 	</script>
 </body>
 </html>
