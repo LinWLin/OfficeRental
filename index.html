@@ -45,7 +45,8 @@
 		ctx.fillRect(840,1010,170,105);
 		ctx.fillRect(1030,1010,160,105);
 
-		/*首三行*/
+		img.onload=function(){
+		 /*首三行*/
 		for(var i=0,x=6;i<24;i++){
 			ctx.drawImage(img,x,20);
 			ctx.drawImage(img,x,70);
@@ -119,6 +120,7 @@
 			ctx.drawImage(img,1090,y);
 			ctx.drawImage(img,1140,y);
 			y+=50;
+		}
 		}
 
 		ctx.fillStyle='#F0F0F0';
